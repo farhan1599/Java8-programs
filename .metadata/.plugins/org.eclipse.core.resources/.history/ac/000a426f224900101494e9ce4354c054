@@ -1,0 +1,16 @@
+package com.java8.practice;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		String s1 = "Hello";
+		String s2 = "World";
+		
+		AddString add = new AddString();
+		String convert = add.convert(s1, s2);
+
+		System.out.println(convert);
+	}
+
+}

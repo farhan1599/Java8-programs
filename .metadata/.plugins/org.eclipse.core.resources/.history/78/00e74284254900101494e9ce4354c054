@@ -1,0 +1,11 @@
+package com.java8.demo;
+
+public class AddNumber implements MyInterface {
+
+	@Override
+	public int add(int a, int b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

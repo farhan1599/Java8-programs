@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.java8.practice.AddString"/>
+    <fullyQualifiedTypeName name="com.java8.practice.MyInterface"/>
+    <fullyQualifiedTypeName name="java.lang.FunctionalInterface"/>
+    <fullyQualifiedTypeName name="com.java8.demo.MyInterface"/>
+    <fullyQualifiedTypeName name="com.java8.demo.Employee"/>
+    <fullyQualifiedTypeName name="com.java8.demo.Product"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
+    <fullyQualifiedTypeName name="com.java8.demo.Student"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="java.time.LocalTime"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.temporal.ChronoUnit"/>
+</qualifiedTypeNameHistroy>

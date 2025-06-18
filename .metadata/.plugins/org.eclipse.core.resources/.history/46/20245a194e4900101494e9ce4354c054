@@ -1,0 +1,60 @@
+package com.java8.demo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamDemo {
+
+	public static void main(String[] args) {
+
+		List<Product> products = new ArrayList<>();
+
+		products.add(new Product(1011, "Samsung", 70000.00, "Mobile"));
+		products.add(new Product(1131, "Apple", 120000.00, "Mobile"));
+		products.add(new Product(1011, "Oppo", 12000.00, "Mobile"));
+		products.add(new Product(1221, "Vivo", 18000.00, "Mobile"));
+
+		products.add(new Product(1543, "Jorderns", 80000.00, "Footwear"));
+		products.add(new Product(1553, "Sneakers", 800.00, "Footwear"));
+		products.add(new Product(1573, "Slippers", 150.00, "Footwear"));
+		products.add(new Product(1513, "Sandals", 250.00, "Footwear"));
+
+		products.add(new Product(1245, "JBL", 2500.00, "Speaker"));
+		products.add(new Product(1235, "Boat", 1500.00, "Speaker"));
+		products.add(new Product(1285, "Mivi", 3500.00, "Speaker"));
+		products.add(new Product(1265, "Sony", 25000.00, "Speaker"));
+
+		products.add(new Product(1622, "SmartWatch", 1200.00, "Watch"));
+		products.add(new Product(1642, "DigitalWatch", 500.00, "Watch"));
+		products.add(new Product(1662, "SportWatch", 10000.00, "Watch"));
+		products.add(new Product(1682, "FitnessWatch", 1500.00, "Watch"));
+
+//find the "mobile" category from the list using stream and store them into a new list
+
+		// filter() takes Predicate object, abstract method: boolean test(T t);
+		List<Product> newList = products.stream().filter(p -> p.getCategory().equalsIgnoreCase("mobile"))
+				.collect(Collectors.toList());
+
+		newList.forEach(p -> System.out.println(p));
+
+		System.out.println("=".repeat(80));
+
+//find the "speaker" category from the list using stream and sort them ascending order of the price
+
+		// sorted() takes Comparator object, abstract method: int compare(T o1, T o2);
+		products.stream().filter(p -> p.getCategory().equalsIgnoreCase("speaker"))
+				.sorted((p1, p2) -> (int) (p1.getPrice() - p2.getPrice())).forEach(p -> System.out.println(p));
+
+		System.out.println("=".repeat(80));
+
+//find the productName "SmartWatch" from the list and increment the existing price by 2000 and sort them ascending order of the price
+		
+		products.stream().filter(p -> p.getProductName().equalsIgnoreCase("smartwatch"))
+		.map(p -> {
+			p.setPrice(p.getPrice()+2000.0);
+			return p;
+		}).filter(p -> p.getCategory().equalsIgnoreCase("watch")).sorted((p1,p2) -> (int) (p1.getPrice() -p2.getPrice())).forEach(p -> System.out.println(p));
+
+	}
+}

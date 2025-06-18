@@ -1,0 +1,12 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.pactice.arrays.ThirdLargest"><rhs name\="com.pactice.arrays.ThirdLargest"/></lhs><lhs name\="com.practice.arrays.SecondMinMax"><rhs name\="com.practice.arrays.SecondMinMax"/></lhs><lhs name\="java.util.SequencedCollection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.List"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.Comparator"><rhs name\="com.collection.comparator.EmpnoComparator"/><rhs name\="com.collection.comparator.EnameComparator"/><rhs name\="com.collection.comparator.SalComparator"/></lhs><lhs name\="com.collection.set.Employee"><rhs name\="com.collection.set.Employee"/></lhs><lhs name\="com.collection.set.Customer"><rhs name\="com.collection.set.Customer"/></lhs><lhs name\="com.java8.demo.Employee"><rhs name\="com.java8.demo.Employee"/></lhs><lhs name\="com.java8.demo.Product"><rhs name\="com.java8.demo.Product"/></lhs><lhs name\="com.java8.demo.Student"><rhs name\="com.java8.demo.Student"/></lhs><lhs name\="java.time.temporal.Temporal"><rhs name\="java.time.LocalTime"/><rhs name\="java.time.LocalDate"/></lhs><lhs name\="java.time.temporal.TemporalAccessor"><rhs name\="java.time.LocalTime"/><rhs name\="java.time.LocalDate"/></lhs><lhs name\="java.time.temporal.TemporalAdjuster"><rhs name\="java.time.LocalTime"/><rhs name\="java.time.LocalDate"/></lhs><lhs name\="java.time.chrono.ChronoLocalDate"><rhs name\="java.time.LocalDate"/></lhs></history>
+content_assist_number_of_computers=14
+content_assist_proposals_background=224,224,224
+content_assist_proposals_foreground=15,15,15
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=23
+spelling_locale_initialized=true
+typefilter_migrated_2=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true
