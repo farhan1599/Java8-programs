@@ -1,8 +1,0 @@
-package com.java8.practice;
-
-public class Main implements MyInterface{
-	
-	@FunctionalInterface
-	
-
-}

@@ -1,0 +1,274 @@
+package com.java8.demo;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class StreamDemo {
+
+	public static void main(String[] args) {
+
+		List<Product> products = new ArrayList<>();
+
+		products.add(new Product(1011, "Samsung", 70000.00, "Mobile"));
+		products.add(new Product(1131, "Apple", 120000.00, "Mobile"));
+		products.add(new Product(1011, "Oppo", 12000.00, "Mobile"));
+		products.add(new Product(1221, "Vivo", 18000.00, "Mobile"));
+
+		products.add(new Product(1543, "Jorderns", 80000.00, "Footwear"));
+		products.add(new Product(1553, "Sneakers", 800.00, "Footwear"));
+		products.add(new Product(1573, "Slippers", 150.00, "Footwear"));
+		products.add(new Product(1513, "Sandals", 250.00, "Footwear"));
+
+		products.add(new Product(1245, "JBL", 2500.00, "Speaker"));
+		products.add(new Product(1235, "Boat", 1500.00, "Speaker"));
+		products.add(new Product(1285, "Mivi", 3500.00, "Speaker"));
+		products.add(new Product(1265, "Sony", 25000.00, "Speaker"));
+
+		products.add(new Product(1622, "SmartWatch", 1200.00, "Watch"));
+		products.add(new Product(1642, "DigitalWatch", 500.00, "Watch"));
+		products.add(new Product(1662, "SportWatch", 10000.00, "Watch"));
+		products.add(new Product(1682, "FitnessWatch", 1500.00, "Watch"));
+
+//=================================================================================================
+
+//find the "mobile" category from the list using stream and store them into a new list
+
+		// filter() takes Predicate object, abstract method: boolean test(T t);
+		List<Product> newList = products.stream().filter(p -> p.getCategory().equalsIgnoreCase("mobile"))
+				.collect(Collectors.toList());
+
+		newList.forEach(p -> System.out.println(p));
+
+		System.out.println("=".repeat(80));
+
+//==================================================================================================
+
+//find the "speaker" category from the list using stream and sort them ascending order of the price
+
+		// sorted() takes Comparator object, abstract method: int compare(T o1, T o2);
+		products.stream().filter(p -> p.getCategory().equalsIgnoreCase("speaker"))
+				.sorted((p1, p2) -> (int) (p1.getPrice() - p2.getPrice())).forEach(p -> System.out.println(p));
+
+		System.out.println("=".repeat(80));
+
+//==========================================================================================================================
+
+//find the productName "SmartWatch" from the list and increment the existing price by 2000 and sort them ascending order of the price
+
+		// map() takes Function object, abstract method: R apply(T t);
+		products.stream().map(p -> {
+
+			if (p.getProductName().equalsIgnoreCase("smartwatch")) {
+				p.setPrice(p.getPrice() + 2000.0);
+			}
+			return p;
+		}).filter(p -> p.getCategory().equalsIgnoreCase("watch"))
+				.sorted((p1, p2) -> (int) (p1.getPrice() - p2.getPrice())).forEach(p -> System.out.println(p));
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Filter products with price greater than ₹50,000 using Stream
+		System.out.println("<<< PRODUCT WITH PRICE > 50000 >>>");
+		List<Product> expensiveProducts = products.stream().filter(p -> p.getPrice() > 50000)
+				.collect(Collectors.toList());
+		expensiveProducts.forEach(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//====================================================================================================
+
+		// Get the list of all product names using Stream
+		System.out.println("<<< LIST OF ALL PRODUCT NAMES >>>");
+		// products.stream().map(Product::getProductName).collect(Collectors.toList());
+		List<String> productNames = products.stream().map(p -> p.getProductName()).collect(Collectors.toList());
+		productNames.forEach(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Sort all products by price in ascending order using Stream
+		System.out.println("<<< ALL PRODUCTS PRICE SORTED IN ASCENDING ORDER >>>");
+
+		// products.stream().sorted((p1,p2) -> (int) (p1.getPrice() -
+		// p2.getPrice())).forEach(System.out::println);
+
+		products.stream().sorted(Comparator.comparing(Product::getPrice)).forEach(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Sort all products by price in descending order using Stream
+
+		System.out.println("<<< ALL PRODUCTS PRICE SORTED IN DESCENDING ORDER >>>");
+
+		// products.stream().sorted((p1, p2) -> (int) (p2.getPrice() -
+		// p1.getPrice())).forEach(System.out::println);
+
+		products.stream().sorted(Comparator.comparing(Product::getPrice).reversed()).forEach(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Group products by category using Stream
+
+		System.out.println("<<< GROUPING PRODUCTS BASED ON CATEGORY >>>");
+
+		// groupingBy returns Map object
+		// Map<String, List<Product>> groupedByCategory =
+		// products.stream().collect(Collectors.groupingBy(p -> p.getCategory()));
+
+		Map<String, List<Product>> groupedByCategory = products.stream()
+				.collect(Collectors.groupingBy(Product::getCategory));
+
+		groupedByCategory.forEach((category, list) -> {
+			System.out.println(category + ":");
+
+			list.forEach(System.out::println);
+		});
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Group by category and sum of prices using Stream
+		System.out.println("<<< SUM OF PRICE FOR EACH CATEGORY >>>");
+
+		// Map<String, Double> totalPriceByCategory = products.stream()
+		// .collect(Collectors.groupingBy(p -> p.getCategory(),
+		// Collectors.summingDouble(p -> p.getPrice())));
+
+		Map<String, Double> totalPriceByCategory = products.stream()
+				.collect(Collectors.groupingBy((Product::getCategory), Collectors.summingDouble(Product::getPrice)));
+		totalPriceByCategory.forEach((category, totalPrice) -> System.out.println(category + " → " + totalPrice));
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Count how many products are there in each category using Stream
+		System.out.println("<<< NUMBER OF PRODUCTS IN EACH CATEGORY >>>");
+
+		// Map<String, Long> countByCategory = products.stream()
+		// .collect(Collectors.groupingBy(p -> p.getCategory(), Collectors.counting()));
+
+		Map<String, Long> countByCategory = products.stream()
+				.collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
+		countByCategory.forEach((category, count) -> System.out.println(category + " → " + count));
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Find the most expensive product using Stream
+		System.out.println("<<< MOST EXPENSIVE PRODUCT >>>");
+		// Optional<Product> mostExpensive = products.stream().max((p1,p2) ->
+		// (int)(p1.getPrice() - p2.getPrice()));
+		Optional<Product> mostExpensive = products.stream().max(Comparator.comparing(Product::getPrice));
+		mostExpensive.ifPresent(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Find the cheapest product using Stream
+
+		System.out.println("<<< MOST CHEAPEST PRODUCT >>>");
+
+		// Optional<Product> cheapestProduct = products.stream().min((p1, p2) -> (int)
+		// (p1.getPrice() - p2.getPrice()));
+		Optional<Product> cheapestProduct = products.stream().min(Comparator.comparing(Product::getPrice));
+		cheapestProduct.ifPresent(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Find the first product with price > ₹10,000 using Stream
+
+		System.out.println("<<< FIRST PRODUCT WITH PRICE > ₹10000 >>>");
+		Optional<Product> firstExpensive = products.stream().filter(p -> p.getPrice() > 10000).findFirst();
+		firstExpensive.ifPresent(System.out::println);
+
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Check if any product is priced above ₹1,00,000 using Stream
+		System.out.println("<<< CHECK IF ANY PRODUCT PRICE IS ABOVE ₹100000 OR NOT >>>");
+		boolean anyAbove1Lakh = products.stream().anyMatch(p -> p.getPrice() > 100000);
+		System.out.println(anyAbove1Lakh);
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Check if all products are priced below ₹2,00,000 using Stream
+		System.out.println("<<< CHECK IF ALL PRODUCT PRICE IS BELOW ₹200000 >>>");
+		boolean allAffordable = products.stream().allMatch(p -> p.getPrice() < 200000);
+		System.out.println(allAffordable);
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Check if no product is priced at ₹0 using Stream
+		System.out.println("<<< CHECK IF NO PRODUCT IS PRICED AT ₹0 >>>");
+		boolean noneFree = products.stream().noneMatch(p -> p.getPrice() == 0);
+		System.out.println(noneFree);
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Get a list of distinct product names using Stream
+		System.out.println("<<< LIST OF DISTINCT PRODUCT NAMES >>>");
+
+		// List<String> distinctNames = products.stream().map(p ->
+		// p.getProductName()).distinct().collect(Collectors.toList());
+		List<String> distinctNames = products.stream().map(Product::getProductName).distinct()
+				.collect(Collectors.toList());
+		distinctNames.forEach(System.out::println);
+		System.out.println("=".repeat(80));
+
+//===================================================================================================
+
+		// Get a Set of all unique categories using Stream
+		System.out.println("<<< GET A SET OF ALL UNIQUE CATEGORIES >>>");
+		// Set<String> uniqueCategories = products.stream().map(p ->
+		// p.getCategory()).collect(Collectors.toSet());
+		Set<String> uniqueCategories = products.stream().map(Product::getCategory).collect(Collectors.toSet());
+		uniqueCategories.forEach(System.out::println);
+		System.out.println("=".repeat(80));
+
+		
+//===================================================================================================
+
+		//Get total price of all products using Stream
+		
+		System.out.println("<<< TOTAL PRICE OF ALL PRODUCTS >>>");
+	//	double totalPrice = products.stream().mapToDouble(p -> p.getPrice()).sum();
+		double totalPrice = products.stream().mapToDouble(Product::getPrice).sum();
+		System.out.println(totalPrice);
+		
+		System.out.println("=".repeat(80));
+		
+		
+//===================================================================================================
+
+		//Get average price of all products using Stream
+		
+		System.out.println("<<< AVERAGE PRICE OF ALL PRODUCT >>>");
+		
+		Double averagePrice = products.stream().collect(Collectors.averagingDouble(p -> p.getPrice()));
+		System.out.println(averagePrice);
+
+	}
+
+}

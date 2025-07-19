@@ -1,6 +1,0 @@
-package com.java8.practice;
-
-public interface MyInterface {
-
-	String convert(String s1, String s2);
-}
